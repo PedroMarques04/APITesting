@@ -1,0 +1,395 @@
+{
+	"info": {
+		"_postman_id": "53052860-2c43-4965-a77e-0a1b3ad71cd3",
+		"name": "Gerenciador de viagens",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26717822"
+	},
+	"item": [
+		{
+			"name": "Fazer login com Administrador",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const resposta = pm.response.json();\r",
+							"pm.globals.set(\"token\", resposta.data.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"admin@email.com\",\r\n  \"senha\": \"654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/v1/auth",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Viagem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code = 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"const schema = {\r",
+							"    \"$schema\": \"https://json-schema.org/draft/2019-09/schema\",\r",
+							"    \"$id\": \"http://example.com/example.json\",\r",
+							"    \"type\": \"object\",\r",
+							"    \"default\": {},\r",
+							"    \"title\": \"Root Schema\",\r",
+							"    \"required\": [\r",
+							"        \"data\",\r",
+							"        \"errors\"\r",
+							"    ],\r",
+							"    \"properties\": {\r",
+							"        \"data\": {\r",
+							"            \"type\": \"object\",\r",
+							"            \"default\": {},\r",
+							"            \"title\": \"The data Schema\",\r",
+							"            \"required\": [\r",
+							"                \"id\",\r",
+							"                \"localDeDestino\",\r",
+							"                \"dataPartida\",\r",
+							"                \"dataRetorno\",\r",
+							"                \"acompanhante\",\r",
+							"                \"regiao\"\r",
+							"            ],\r",
+							"            \"properties\": {\r",
+							"                \"id\": {\r",
+							"                    \"type\": \"integer\",\r",
+							"                    \"default\": 0,\r",
+							"                    \"title\": \"The id Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        1\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"localDeDestino\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"default\": \"\",\r",
+							"                    \"title\": \"The localDeDestino Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        \"Manaus\"\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"dataPartida\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"default\": \"\",\r",
+							"                    \"title\": \"The dataPartida Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        \"2023-04-06\"\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"dataRetorno\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"default\": \"\",\r",
+							"                    \"title\": \"The dataRetorno Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        \"2023-05-06\"\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"acompanhante\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"default\": \"\",\r",
+							"                    \"title\": \"The acompanhante Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        \"Jim\"\r",
+							"                    ]\r",
+							"                },\r",
+							"                \"regiao\": {\r",
+							"                    \"type\": \"string\",\r",
+							"                    \"default\": \"\",\r",
+							"                    \"title\": \"The regiao Schema\",\r",
+							"                    \"examples\": [\r",
+							"                        \"Norte\"\r",
+							"                    ]\r",
+							"                }\r",
+							"            },\r",
+							"            \"examples\": [{\r",
+							"                \"id\": 1,\r",
+							"                \"localDeDestino\": \"Manaus\",\r",
+							"                \"dataPartida\": \"2023-04-06\",\r",
+							"                \"dataRetorno\": \"2023-05-06\",\r",
+							"                \"acompanhante\": \"Jim\",\r",
+							"                \"regiao\": \"Norte\"\r",
+							"            }]\r",
+							"        },\r",
+							"        \"errors\": {\r",
+							"            \"type\": \"array\",\r",
+							"            \"default\": [],\r",
+							"            \"title\": \"The errors Schema\",\r",
+							"            \"items\": {},\r",
+							"            \"examples\": [\r",
+							"                []\r",
+							"            ]\r",
+							"        }\r",
+							"    },\r",
+							"    \"examples\": [{\r",
+							"        \"data\": {\r",
+							"            \"id\": 1,\r",
+							"            \"localDeDestino\": \"Manaus\",\r",
+							"            \"dataPartida\": \"2023-04-06\",\r",
+							"            \"dataRetorno\": \"2023-05-06\",\r",
+							"            \"acompanhante\": \"Jim\",\r",
+							"            \"regiao\": \"Norte\"\r",
+							"        },\r",
+							"        \"errors\": []\r",
+							"    }]\r",
+							"}\r",
+							"pm.test(\"Validar a estrutura do corpo da resposta\", function (){\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"acompanhante\": \"Dwight\",\r\n  \"dataPartida\": \"2023-10-11\",\r\n  \"dataRetorno\": \"2023-10-12\",\r\n  \"localDeDestino\": \"Rio de Janeiro\",\r\n  \"regiao\": \"Sudeste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/v1/viagens",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"viagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazer login com usuário",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const resposta = pm.response.json();\r",
+							"pm.globals.set(\"tokenUsuario\", resposta.data.token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"usuario@email.com\",\r\n  \"senha\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/v1/auth",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar viagens",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenUsuario}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{servidor}}/v1/viagens",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"viagens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar viagem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"acompanhante\": \"Michael\",\r\n  \"dataPartida\": \"2023-10-11\",\r\n  \"dataRetorno\": \"2023-10-12\",\r\n  \"localDeDestino\": \"Vitória\",\r\n  \"regiao\": \"Sudeste\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{servidor}}/v1/viagens/1",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"viagens",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar viagem",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{servidor}}/v1/viagens/2",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"viagens",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Status da API",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{servidor}}/v1/status",
+					"host": [
+						"{{servidor}}"
+					],
+					"path": [
+						"v1",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
