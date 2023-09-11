@@ -33,7 +33,7 @@ Instruções de uso
 
 Pré-requisitos
 ============
-
+- Acessar o endereço da <a href="[https://www.postman.com/](https://thinking-tester-contact-list.herokuapp.com/)">API</a>
 - Instalação do <a href="https://www.postman.com/">Postman</a>
 - Conhecimentos sobre protocolos HTTP
 
